@@ -11,7 +11,7 @@ $(document).ready(function(){
         $("#to-do-list").empty();
         // add task list to html
         response.tasks.forEach(function (task) {
-          $('#to-do-list').append('<div class="row"><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">Delete</button><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '>');
+          $('#to-do-list').append('<div class="flex-container row border border-success"><p class="col-xs-8"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '>' + task.content + '</p><button class="delete" data-id="' + task.id + '">X</button>');
         });
       },
       error: function (request, textStatus, errorMessage) {

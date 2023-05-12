@@ -1,10 +1,51 @@
+.container-xl {
+  background-color: rgb(223, 222, 222);
+}
+
 h1 {
   color: green;
+  font-size: 4em;
   margin-top: 10px;
+  text-align: center;
 }
 
 #new-to-dos {
   margin-bottom: 10px;
 }
 
+#new-task {
+  border: none;
+}
 
+.mark-complete {
+  margin-right: 5px;
+}
+
+#to-do-list {
+  color: rgb(77, 77, 77);
+  padding-left: 12px;
+}
+
+#main {
+  background-color: rgb(250, 252, 201);
+  width: 90%;
+  margin: auto;
+  padding: 50px;
+}
+
+@media (min-width: 768px) {
+  #main {
+    width: 60%;
+  }
+}
+
+.delete {
+  color:rgb(77, 77, 77);
+  background-color: rgb(250, 252, 201);
+  border: none;
+  justify-content: right;
+}
+
+.delete:hover {
+  font-weight: bold;
+}
