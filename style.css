@@ -22,8 +22,11 @@ h1 {
 }
 
 #to-do-list {
+  display: flex;
+  flex-direction: column;
   color: rgb(77, 77, 77);
   padding-left: 12px;
+  flex-wrap: nowrap;
 }
 
 #main {
@@ -39,13 +42,7 @@ h1 {
   }
 }
 
-.delete {
-  color:rgb(77, 77, 77);
-  background-color: rgb(250, 252, 201);
-  border: none;
-  justify-content: right;
-}
-
 .delete:hover {
   font-weight: bold;
+  text-decoration: none;
 }

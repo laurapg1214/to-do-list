@@ -11,7 +11,7 @@ $(document).ready(function(){
         $("#to-do-list").empty();
         // add task list to html
         response.tasks.forEach(function (task) {
-          $('#to-do-list').append('<div class="flex-container row border border-success"><p class="col-xs-8"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '>' + task.content + '</p><button class="delete" data-id="' + task.id + '">X</button>');
+          $('#to-do-list').append('<div class="row border border-danger"><p class="col-1 border border-info"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '></p><p class="col-10 border border-success">' + task.content + '</p><div class="col-1 border border-info"><a href class="delete" data-id="' + task.id + '">🗙</a></div></div>');
         });
       },
       error: function (request, textStatus, errorMessage) {
@@ -66,6 +66,7 @@ $(document).ready(function(){
 
   // click event for delete buttons
   $(document).on('click', '.delete', function () {
+    console.log('hello');
     deleteTask($(this).data('id'));
   });
 
