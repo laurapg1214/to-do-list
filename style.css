@@ -1,3 +1,8 @@
+#top {
+  height: 20px;
+  background-color: white;
+}
+
 .container-xl {
   background-color: rgb(223, 222, 222);
 }
@@ -5,28 +10,35 @@
 h1 {
   color: green;
   font-size: 4em;
-  margin-top: 10px;
+  padding: 20px 0px 20px 0px;
   text-align: center;
 }
 
 #new-to-dos {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 #new-task {
   border: none;
+  width: 100%;
+  font-size: 1.5em;
 }
 
-.mark-complete {
-  margin-right: 5px;
+#add {
+  border: none;
+  font-size: 1.5em;
   color: green;
+  background-color:rgb(250, 252, 201);
+}
+
+#add:hover {
+  font-weight: bold;
 }
 
 #to-do-list {
   display: flex;
   flex-direction: column;
   color: rgb(77, 77, 77);
-  padding-left: 12px;
   flex-wrap: nowrap;
 }
 
@@ -52,4 +64,9 @@ h1 {
 .delete:hover {
   font-weight: bold;
   text-decoration: none;
+}
+
+#bottom {
+  height: 100px;
+  width: 100%;
 }

@@ -2,7 +2,6 @@ $(document).ready(function(){
 
   // function to list all current to-do list items
   var refreshTasks = function () {
-    console.log('refreshTasks');
     $.ajax({
       type: 'GET',
       url: 'https://fewd-todolist-api.onrender.com/tasks?api_key=191',
@@ -23,7 +22,6 @@ $(document).ready(function(){
   
   // function to add a new to-do list item 
   var createTask = function () {
-    console.log('createTask');
     $.ajax({
       type: 'POST',
       url: 'https://fewd-todolist-api.onrender.com/tasks?api_key=191',
@@ -48,13 +46,13 @@ $(document).ready(function(){
 
   // click event for add button
   $('#new-to-dos').on('submit', function (e) {
+    console.log('its still working');
     e.preventDefault();
     createTask();
   });
 
   // function to delete a to-do list item
   var deleteTask = function(id) {
-    console.log('deleteTask');
     $.ajax({
       type: 'DELETE',
       url: 'https://fewd-todolist-api.onrender.com/tasks/' + id + '?api_key=191',
@@ -69,13 +67,11 @@ $(document).ready(function(){
 
   // click event for delete buttons
   $(document).on('click', '.delete', function () {
-    console.log('delete icon clicked');
     deleteTask($(this).data('id'));
   });
 
   // function to mark task complete
   var taskComplete = function (id) {
-    console.log('taskComplete');
     $.ajax({
       type: 'PUT',
       url: 'https://fewd-todolist-api.onrender.com/tasks/' + id + '/mark_complete?api_key=191',
@@ -91,7 +87,6 @@ $(document).ready(function(){
 
   // function to mark task active
   var taskActive = function (id) {
-    console.log('taskActive');
     $.ajax({
       type: 'PUT',
       url: 'https://fewd-todolist-api.onrender.com/tasks/' + id + '/mark_active?api_key=191',
