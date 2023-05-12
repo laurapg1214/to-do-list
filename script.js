@@ -9,10 +9,10 @@ $(document).ready(function(){
       success: function (response, textStatus) {
         // clear existing tasks from html
         $("#to-do-list").empty();
-        // add task list to html with delete buttons
+        // add task list to html
         response.tasks.forEach(function (task) {
-          $('#to-do-list').append('<div class="row"><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">Delete</button>');
-        })
+          $('#to-do-list').append('<div class="row"><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">Delete</button><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '>');
+        });
       },
       error: function (request, textStatus, errorMessage) {
         console.log(errorMessage);
@@ -67,6 +67,28 @@ $(document).ready(function(){
   // click event for delete buttons
   $(document).on('click', '.delete', function () {
     deleteTask($(this).data('id'));
+  });
+
+  // function to mark task complete
+  var taskComplete = function (id) {
+    $.ajax({
+      type: 'PUT',
+      url: 'https://fewd-todolist-api.onrender.com/tasks/' + id + '/mark_complete?api_key=191',
+      dataType: 'json',
+      success: function(response, textStatus) {
+        refreshTasks();
+      },
+      error: function (request, textStatus, errorMessage) {
+        console.log(errorMessage);
+      }
+    });
+  }
+
+  // link checkbox to taskComplete function
+  $(document).on('change', '.mark-complete', function () {
+    if (this.checked) {
+      taskComplete($(this).data('id'));
+    }
   });
 
   refreshTasks();
