@@ -84,10 +84,27 @@ $(document).ready(function(){
     });
   }
 
-  // link checkbox to taskComplete function
+  // function to mark task active
+  var taskActive = function (id) {
+    $.ajax({
+      type: 'PUT',
+      url: 'https://fewd-todolist-api.onrender.com/tasks/' + id + '/mark_active?api_key=191',
+      dataType: 'json',
+      success: function(response, textStatus) {
+        refreshTasks();
+      },
+      error: function (request, textStatus, errorMessage) {
+        console.log(errorMessage);
+      }
+    });
+  }
+
+  // link checkbox to taskComplete/taskActive functions
   $(document).on('change', '.mark-complete', function () {
     if (this.checked) {
       taskComplete($(this).data('id'));
+    } else {
+      taskActive($(this).data('id'));
     }
   });
 
