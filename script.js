@@ -11,7 +11,7 @@ $(document).ready(function(){
         $("#to-do-list").empty();
         // add task list to html
         response.tasks.forEach(function (task) {
-          $('#to-do-list').prepend('<div class="row"><p class="col-1"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '></p><p class="col-10">' + task.content + '</p><div class="col-1"><button class="delete" data-id="' + task.id + '">🗙</button></div></div>');
+          $('#to-do-list').prepend('<div class="row newTask"><p class="col-1"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '></p><p class="col-10">' + task.content + '</p><div class="col-1"><button class="delete" data-id="' + task.id + '">🗙</button></div></div>');
         });
       },
       error: function (request, textStatus, errorMessage) {
@@ -46,7 +46,6 @@ $(document).ready(function(){
 
   // click event for add button
   $('#new-to-dos').on('submit', function (e) {
-    console.log('its still working');
     e.preventDefault();
     createTask();
   });
@@ -107,6 +106,14 @@ $(document).ready(function(){
     } else {
       taskActive($(this).data('id'));
     }
+  });
+
+  // event listener for toggle buttons
+  $('#active').on ('click', function() {
+    const showTask = document.querySelector('.newTask');
+    if (this.completed == 'true') {
+      showTask.style.display = 'none';
+    } 
   });
 
   refreshTasks();
