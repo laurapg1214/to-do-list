@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   // function to list all current to-do list items
-  var refreshTasks = function () {
+  var refreshTasks = function (toggleStatus) {
     $.ajax({
       type: 'GET',
       url: 'https://fewd-todolist-api.onrender.com/tasks?api_key=191',
@@ -11,7 +11,26 @@ $(document).ready(function(){
         $("#to-do-list").empty();
         // add task list to html
         response.tasks.forEach(function (task) {
-          $('#to-do-list').prepend('<div class="row newTask"><p class="col-1"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '></p><p class="col-10">' + task.content + '</p><div class="col-1"><button class="delete" data-id="' + task.id + '">🗙</button></div></div>');
+          // function to create list
+          var createList = function () {
+            $('#to-do-list').prepend('<div class="row newTask"><p class="col-1"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '></p><p class="col-10">' + task.content + '</p><div class="col-1"><button class="delete" data-id="' + task.id + '">🗙</button></div></div>');   
+          }
+          // toggle 'active'
+          if (toggleStatus == 'active') {
+            if (!task.completed) {
+              createList();
+            }
+          }
+          // toggle 'complete'
+          if (toggleStatus == 'complete') {
+            if (task.completed) {
+              createList();
+            }
+          }
+          // toggle 'all'
+          if (toggleStatus == 'all') {
+            createList();
+          }
         });
       },
       error: function (request, textStatus, errorMessage) {
@@ -108,27 +127,20 @@ $(document).ready(function(){
     }
   });
 
-  // function to deactivate active class of buttons
-    var deactivate = function(id) {
-      $('#' + id).replaceWith('<button type="button" class="btn btn-success statusButton" data-bs-toggle="button" autocomplete="off" aria-pressed="false" id="' + id + '">' + id + '</button>')
-    }
-
   // event listener for active button
-  $('#active').on ('click', function() {
-    // filter only active items
-    const showTask = document.querySelector('.newTask');
-    if (this.completed == 'true') {
-      showTask.style.display = 'none';
-    } 
-
-    // change active status of currently activated button
-    deactivate('all');
-    deactivate('complete');
+  $('#active').on('click', function() {
+    refreshTasks('active');
   });
 
-  // TODO event listener for complete button
+  // event listener for complete button
+  $('#complete').on('click', function() {
+     refreshTasks('complete');
+   });
 
-  // TODO event listener for all button
+  // event listener for all button
+  $('#all').on('click', function() {
+     refreshTasks('all');
+   });
 
-  refreshTasks();
+  refreshTasks('all');
 });
