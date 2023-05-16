@@ -108,13 +108,27 @@ $(document).ready(function(){
     }
   });
 
-  // event listener for toggle buttons
+  // function to deactivate active class of buttons
+    var deactivate = function(id) {
+      $('#' + id).replaceWith('<button type="button" class="btn btn-success statusButton" data-bs-toggle="button" autocomplete="off" aria-pressed="false" id="' + id + '">' + id + '</button>')
+    }
+
+  // event listener for active button
   $('#active').on ('click', function() {
+    // filter only active items
     const showTask = document.querySelector('.newTask');
     if (this.completed == 'true') {
       showTask.style.display = 'none';
     } 
+
+    // change active status of currently activated button
+    deactivate('all');
+    deactivate('complete');
   });
+
+  // TODO event listener for complete button
+
+  // TODO event listener for all button
 
   refreshTasks();
 });
