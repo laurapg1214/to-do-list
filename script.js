@@ -9,26 +9,29 @@ $(document).ready(function(){
       success: function (response, textStatus) {
         // clear existing tasks from html
         $("#to-do-list").empty();
+        // sort tasks
+        var sortedTasks = response.tasks.sort(function (a, b) {
+          if(a.created_at < b.created_at) return -1;
+          if(a.created_at > b.created_at) return 1;
+          return 0;
+        });
+        console.log(sortedTasks);
         // add task list to html
-        response.tasks.forEach(function (task) {
+        response.tasks.forEach(function (sortedTask) {
           // function to create list
           var createList = function () {
-            $('#to-do-list').prepend('<div class="row newTask"><p class="col-1"><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '></p><p class="col-10">' + task.content + '</p><div class="col-1"><button class="delete" data-id="' + task.id + '">🗙</button></div></div>');   
+            $('#to-do-list').prepend('<div class="row newTask"><p class="col-1"><input type="checkbox" class="mark-complete" data-id="' + sortedTask.id + '"' + (sortedTask.completed ? 'checked' : '') + '></p><p class="col-10">' + sortedTask.content + '</p><div class="col-1"><button class="delete" data-id="' + sortedTask.id + '">🗙</button></div></div>');   
           }
-          // toggle 'active'
+          // toggle 'active'/'complete'/'all'
           if (toggleStatus == 'active') {
-            if (!task.completed) {
+            if (!sortedTask.completed) {
               createList();
             }
-          }
-          // toggle 'complete'
-          if (toggleStatus == 'complete') {
-            if (task.completed) {
+          } else if (toggleStatus == 'complete') {
+            if (sortedTask.completed) {
               createList();
             }
-          }
-          // toggle 'all'
-          if (toggleStatus == 'all') {
+          } else {
             createList();
           }
         });
